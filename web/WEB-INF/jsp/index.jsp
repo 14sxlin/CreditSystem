@@ -10,8 +10,9 @@
     <!--<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">-->
     <link rel="stylesheet" href="<c:url value="/views/Style/tabs.css"/>" type="text/css">
 
-    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-    <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+    <script src="<c:url value="/js/jquery-3.2.1.min.js"/>"></script>
+
+    <script  src="<c:url value="/js/bootstrap.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/views/Script/tabs.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/views/Script/demo.js"/>"></script>
 
@@ -56,7 +57,7 @@
                             <ul class="nav nav-list" id="menuSideBar">
                                 <li class="nav-header">导航栏</li>
                                 <li class="nav-divider"></li>
-                                <li mid="tab1" funurl="userInfo.html"><a tabindex="-1" href="javascript:void(0);">个人信息</a>
+                                <li mid="tab1" funurl="<c:out value="info"/>"><a tabindex="-1" href="<c:out value="info"/>">个人信息</a>
                                 </li>
                                 <li mid="tab2" funurl="myCourse.html"><a tabindex="-1" href="javascript:void(0);">我的课程</a>
                                 </li>

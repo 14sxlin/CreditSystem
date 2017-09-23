@@ -25,11 +25,11 @@ class Login {
   @Autowired
   var sqlSession : SqlSession = _
 
-  @RequestMapping(value = Array("/","/login"),
+  @RequestMapping(value = Array("","login"),
     method = Array(RequestMethod.GET))
   def showLoginPage() : String = "login"
 
-  @RequestMapping(value = Array("/login"),
+  @RequestMapping(value = Array("login"),
     method = Array(RequestMethod.POST))
   def doLoginAndGo(@Validated
                    loginInfo: LoginInfo,

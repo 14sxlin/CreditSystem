@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping
   * Created by linsixin on 2017/9/23.
   */
 @Controller
-@RequestMapping(Array("/index"))
 class Index {
   private val logger = LoggerFactory.getLogger(getClass)
 
-  @RequestMapping
+  @RequestMapping(Array("/index"))
   def getPageValidate(session:HttpSession) : String = {
     val user = session.getAttribute("user").asInstanceOf[Student]
     if( user!= null) {

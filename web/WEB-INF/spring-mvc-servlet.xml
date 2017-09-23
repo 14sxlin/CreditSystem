@@ -18,5 +18,6 @@
 
     <mvc:annotation-driven/>
     <mvc:resources mapping="/views/**" location="/views/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
     <!--<mvc:default-servlet-handler />-->
 </beans>

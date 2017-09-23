@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping
   * Created by linsixin on 2017/9/23.
   */
 @Controller
-@RequestMapping(Array("/logout"))
 class Logout {
   private val logger = LoggerFactory.getLogger(getClass)
 
-  @RequestMapping
+  @RequestMapping(Array("logout"))
   def logout(session:HttpSession) : String = {
     if(session.getAttribute("user")!=null){
       logger.info(s"invalidate session : ${session.getId}")
