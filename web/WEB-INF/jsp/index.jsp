@@ -46,7 +46,7 @@
 
     <div class="content">
         <div class="container">
-            <h3 class="page-header">余强</h3>
+            <h3 class="page-header">${user.name}-${user.type}</h3>
             <a class="quit" onclick="loginOut()" href="javascript:">退出</a>
 
             <div class="">

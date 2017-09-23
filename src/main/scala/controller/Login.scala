@@ -1,14 +1,16 @@
 package controller
 
+import javax.servlet.http.HttpSession
+
 import dao.{LoginInfo, StudentDAO}
 import org.apache.ibatis.session.SqlSession
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
-import org.springframework.ui.Model
 import org.springframework.validation.Errors
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod, SessionAttribute}
+import org.springframework.web.bind.annotation.{RequestMapping, RequestMethod}
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 import scala.util.{Failure, Success, Try}
 
@@ -16,7 +18,6 @@ import scala.util.{Failure, Success, Try}
   * Created by linsixin on 2017/9/21.
   */
 @Controller
-@SessionAttribute("user")
 class Login {
 
   private val logger = LoggerFactory.getLogger(getClass)
@@ -30,9 +31,11 @@ class Login {
 
   @RequestMapping(value = Array("/login"),
     method = Array(RequestMethod.POST))
-  def doLoginAndGo(@Validated loginInfo: LoginInfo,
-              errors:Errors,
-              model: Model): String = {
+  def doLoginAndGo(@Validated
+                   loginInfo: LoginInfo,
+                   errors:Errors,
+                   model: RedirectAttributes,
+                   session:HttpSession): String = {
     if(errors.hasErrors) {
       checkErrorAndPutInfo(errors,model)
       "redirect:login"
@@ -40,7 +43,7 @@ class Login {
     else{
       tryParseUserId(loginInfo.userId) match {
         case Success(userId) =>
-          validateUserAndGo(userId,loginInfo.password,model)
+          validateUserAndGo(userId,loginInfo.password,model,session)
         case Failure(exception) =>
           logger.error("",exception)
           putNameOrPasswordErrorAndGo(model)
@@ -48,7 +51,7 @@ class Login {
     }
   }
 
-  private def checkErrorAndPutInfo(errors: Errors,model: Model): Unit ={
+  private def checkErrorAndPutInfo(errors: Errors,model: RedirectAttributes): Unit ={
     errors.getFieldErrors.forEach { e =>
       logger.error(s"field = ${e.getField}")
       logger.error(s"defaultMsg = ${e.getDefaultMessage}")
@@ -69,12 +72,12 @@ class Login {
     Option(user)
   }
 
-  private def validateUserAndGo(userId:Int,psw:String,model: Model):String = {
+  private def validateUserAndGo(userId:Int,psw:String,model: RedirectAttributes,session: HttpSession):String = {
     queryUser(userId,psw) match {
       case Some(user) =>
         if(userId == user.getId && psw == user.getPassword){
           logger.info(s"login success : $userId")
-          model.addAttribute(user)
+          session.setAttribute("user",user)
           "redirect:index"
         }else putNameOrPasswordErrorAndGo(model)
       case None => putNameOrPasswordErrorAndGo(model)
@@ -82,7 +85,7 @@ class Login {
     }
   }
 
-  private def putNameOrPasswordErrorAndGo(model: Model) = {
+  private def putNameOrPasswordErrorAndGo(model: RedirectAttributes) = {
     model.addAttribute("pswError","name or password error")
     "redirect:login"
   }
