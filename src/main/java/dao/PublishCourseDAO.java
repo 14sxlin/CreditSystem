@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import bean.Publish_Course;
 import org.apache.ibatis.annotations.*;

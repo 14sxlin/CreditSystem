@@ -16,7 +16,7 @@
             <span >用户登录</span>
 
             <div class="input-form">
-                <input name="username" class="form-control" id="inputAccount" placeholder="账号">
+                <input name="userId" class="form-control" id="inputAccount" placeholder="学号">
                 <h6 style="color: red"><c:out value="${param.userError}"/></h6>
             </div>
             <br>
@@ -28,7 +28,7 @@
             <br>
 
             <div class="submit">
-                <button class="btn btn-default" onclick="loginSuccess(); return false;">登 录</button>
+                <button class="btn btn-default">登 录</button>
             </div>
         </form>
     </div>

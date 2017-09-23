@@ -1,4 +1,4 @@
-package model
+package dao
 
 import javax.validation.constraints.{NotNull, Size}
 
@@ -11,7 +11,7 @@ class LoginInfo {
 
   @NotNull
   @Size(min=3,max = 15)
-  @BeanProperty var username :String = ""
+  @BeanProperty var userId : String = ""
   @NotNull
   @Size(min=6,max = 20)
   @BeanProperty var password :String = ""

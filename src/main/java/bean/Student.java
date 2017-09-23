@@ -11,8 +11,11 @@ public class Student {
     private String name;
     private boolean sex;
     private int age;
-    private Date year;
-    private String type;
+    private int year;   //入学年份
+    private String type;//本科生还是研究生
+    private String password;
+
+
 
     public int getId() {
         return id;
@@ -46,11 +49,11 @@ public class Student {
         this.age = age;
     }
 
-    public Date getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -60,5 +63,13 @@ public class Student {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

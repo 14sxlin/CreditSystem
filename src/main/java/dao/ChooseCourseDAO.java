@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import org.apache.ibatis.annotations.*;
 import bean.Choose_Course;

@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 import bean.Room;
 import org.apache.ibatis.annotations.Insert;
